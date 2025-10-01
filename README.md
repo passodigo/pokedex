@@ -1,4 +1,4 @@
-Pokédex Pokémon
+--------------Pokédex Pokémon---------------
 
 Um site interativo que permite buscar informações de qualquer Pokémon diretamente da PokéAPI
 Este projeto foi desenvolvido como prática de front-end e consumo de APIs, utilizando HTML, CSS e JavaScript.
