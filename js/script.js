@@ -51,18 +51,24 @@ form.addEventListener('submit', (event) => {
     renderPokemon (input.value.toLowerCase())
     input.value = '';
     renderPokemonInfo(input.value.toLowerCase());
+    renderPokemon(searchPokemon);
+    renderPokemonExtras(searchPokemon);
 });
 buttonPrev.addEventListener('click', () => {
    if (searchPokemon > 1){
     searchPokemon -= 1;
    renderPokemon(searchPokemon);
    renderPokemonInfo(searchPokemon);
+   renderPokemon(searchPokemon);
+   renderPokemonExtras(searchPokemon);
 }});
 
 buttonNext.addEventListener('click', () => {
    searchPokemon += 1;
    renderPokemon(searchPokemon);
    renderPokemonInfo(searchPokemon);
+   renderPokemon(searchPokemon);
+   renderPokemonExtras(searchPokemon);
 });
 
 (function () {
@@ -135,8 +141,103 @@ buttonNext.addEventListener('click', () => {
     return { text, species };
   };
 })();
+(function () {
+  // cria ou retorna o elemento
+  function getOrCreateEl(className, title) {
+    let el = document.querySelector(`.${className}`);
+    if (el) return el;
+
+    const container = document.querySelector('.pokemon') || document.body;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'pokemon-extra-details';
+    wrapper.innerHTML = `
+      <h3>${title}</h3>
+      <p class="${className}">Carregando...</p>
+    `;
+
+    if (container && container.parentNode) {
+      container.parentNode.insertBefore(wrapper, container.nextSibling);
+    } else {
+      document.body.appendChild(wrapper);
+    }
+
+    return wrapper.querySelector(`.${className}`);
+  }
+
+  async function fetchSpecies(pokemon) {
+    try {
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${encodeURIComponent(pokemon)}`);
+      if (!res.ok) throw new Error('Erro na requisição species');
+      return await res.json();
+    } catch (err) {
+      console.error('Erro ao buscar species:', err);
+      return null;
+    }
+  }
+
+  async function fetchEvolutionChain(url) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Erro na requisição evolution');
+      return await res.json();
+    } catch (err) {
+      console.error('Erro ao buscar evolution chain:', err);
+      return null;
+    }
+  }
+
+  window.renderPokemonExtras = async function (pokemon) {
+    const habitatEl = getOrCreateEl('pokemon_habitat', 'Habitat');
+    const shapeEl = getOrCreateEl('pokemon_shape', 'Forma');
+    const evolutionEl = getOrCreateEl('pokemon_evolution', 'Evolução');
+
+    habitatEl.innerText = "Carregando...";
+    shapeEl.innerText = "Carregando...";
+    evolutionEl.innerText = "Carregando...";
+
+    // normaliza parâmetro
+    let idOrName = pokemon;
+    if (typeof pokemon === 'object' && pokemon !== null) {
+      idOrName = pokemon.id ?? pokemon.name;
+    }
+    if (!idOrName) {
+      habitatEl.innerText = "Inválido"; shapeEl.innerText = "Inválido"; evolutionEl.innerText = "Inválido";
+      return;
+    }
+
+    const species = await fetchSpecies(idOrName);
+    if (!species) {
+      habitatEl.innerText = "Erro"; shapeEl.innerText = "Erro"; evolutionEl.innerText = "Erro";
+      return;
+    }
+
+    // Habitat e Forma
+    habitatEl.innerText = species.habitat?.name || "Desconhecido";
+    shapeEl.innerText = species.shape?.name || "Desconhecida";
+
+    // Evolução
+    if (species.evolution_chain?.url) {
+      const evoData = await fetchEvolutionChain(species.evolution_chain.url);
+      if (evoData) {
+        const chain = [];
+        let current = evoData.chain;
+        while (current) {
+          chain.push(current.species.name);
+          current = current.evolves_to[0];
+        }
+        evolutionEl.innerText = chain.join(" → ");
+      } else {
+        evolutionEl.innerText = "Não disponível";
+      }
+    } else {
+      evolutionEl.innerText = "Não disponível";
+    }
+  };
+})();
+
 
 renderPokemon(searchPokemon);
 renderPokemonInfo(searchPokemon);
-
+renderPokemon(searchPokemon);
+renderPokemonExtras(searchPokemon);
 
