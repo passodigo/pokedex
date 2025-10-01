@@ -32,14 +32,14 @@ Este projeto foi desenvolvido como prática de front-end e consumo de APIs, util
 ## 🖼️ Demonstração
 <img width="1309" height="637" alt="image" src="https://github.com/user-attachments/assets/40b7e4ca-dd6d-42ee-aa7b-b0b14ed7854d" />
 
-
-(Substitua pelo link de uma captura de tela ou GIF do seu site)
+🔗[Veja o sistema em funcionamento].(https://passodigo.github.io/pokedex/)
 
 ---
 
 ## 🚀 Como usar
 
 1. Clone este repositório:
+
 
 git clone https://github.com/passodigo/pokedex.git
 
