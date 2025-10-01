@@ -40,9 +40,9 @@ Este projeto foi desenvolvido como prática de front-end e consumo de APIs, util
 
 1. Clone este repositório:
 
-
+```bash
 git clone https://github.com/passodigo/pokedex.git
-
+```
 
 2. Abra o arquivo index.html no seu navegador.
 
