@@ -1,9 +1,9 @@
-#Pokédex Pokémon
+# Pokédex Pokémon
 
 Um site interativo que permite buscar informações de qualquer Pokémon diretamente da PokéAPI
 Este projeto foi desenvolvido como prática de front-end e consumo de APIs, utilizando HTML, CSS e JavaScript.
 
-##🌟 Funcionalidades
+## 🌟 Funcionalidades
 
 - Buscar Pokémon pelo nome ou número.
 
@@ -17,7 +17,7 @@ Este projeto foi desenvolvido como prática de front-end e consumo de APIs, util
 
 ---
 
-##💻 Tecnologias utilizadas
+## 💻 Tecnologias utilizadas
 
 - HTML5 – Estrutura do site
 
@@ -29,7 +29,7 @@ Este projeto foi desenvolvido como prática de front-end e consumo de APIs, util
 
 ---
 
-##🖼️ Demonstração
+## 🖼️ Demonstração
 <img width="1309" height="637" alt="image" src="https://github.com/user-attachments/assets/40b7e4ca-dd6d-42ee-aa7b-b0b14ed7854d" />
 
 
@@ -37,16 +37,16 @@ Este projeto foi desenvolvido como prática de front-end e consumo de APIs, util
 
 ---
 
-##🚀 Como usar
+## 🚀 Como usar
 
-Clone este repositório:
+1. Clone este repositório:
 
 git clone https://github.com/passodigo/pokedex.git
 
 
-Abra o arquivo index.html no seu navegador.
+2. Abra o arquivo index.html no seu navegador.
 
-Comece a buscar seus Pokémon favoritos!
+3. Comece a buscar seus Pokémon favoritos!
 
 ---
 
